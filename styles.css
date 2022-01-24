@@ -1,0 +1,321 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
+
+
+* {
+    padding: 0;
+    margin: 0;
+    transition: .3s;
+    color: #EEEEEE;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+button {
+    background: #00f2ff;
+    border-radius: 6px;
+    padding: 5px 10px;
+    color: black;
+    font-weight: bold;
+    outline: none;
+    cursor: pointer;
+    border: 3px solid #3f4855;
+    font-size: 18px;
+}
+
+button:hover {
+    border-color: #00f2ff;
+    transform: translateY(-5px);
+    background-color: #3f4855;
+    box-shadow: 2px 3px 0px cyan;
+    color: white;
+}
+
+button:active {
+    transform: none;
+    box-shadow: 1px 1px 0px cyan;
+}
+
+body {
+    background: #222831;
+}
+
+.container {
+    padding: 0 2%;
+}
+
+
+/* Card */
+
+#coviid {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.covid-card {
+    background-color: #00ADB5;
+    padding: 10px;
+    width: 300px;
+    position: relative;
+    display: inline-block;
+    border-radius: 16px;
+    cursor: pointer;
+    margin: 5px 1px;
+    height: 144px;
+}
+
+a .covid-card {
+    background-color: #00ADB5;
+    padding: 10px;
+    width: 300px;
+    position: relative;
+    display: inline-block;
+    border-radius: 16px;
+    cursor: pointer;
+    margin: 5px 1px;
+    height: 144px;
+}
+
+.covid-card img {
+    position: absolute;
+    height: 55px;
+    top: 30px;
+    right: 10px;
+    padding: 5px;
+    background-color: #00ADB5;
+    opacity: 0;
+    z-index: 0;
+}
+
+.covid-card span.number {
+    font-size: 50px;
+    z-index: 10;
+}
+
+a .covid-card span.number {
+    font-size: 50px;
+    z-index: 10;
+}
+
+.covid-card:hover img {
+    opacity: 1;
+    top: 60px;
+    background: #3f4855;
+}
+
+.covid-card:hover h1 {
+    color: red;
+}
+
+a .covid-card:hover h1 {
+    color: red;
+}
+
+.covid-card:hover .number {
+    color: lightgreen;
+}
+
+a .covid-card:hover .number {
+    color: lightgreen;
+}
+
+.covid-card:hover {
+    background: #3f4855;
+}
+
+.covid-card.more:hover {
+    z-index: 90;
+    transform: scale(1.08);
+}
+
+.covid-card.shadow-red:hover {
+    box-shadow: 0 0 20px 10px red;
+}
+
+.covid-card.shadow-light:hover {
+    box-shadow: 0 0 20px 15px #00acb5;
+}
+
+.covid-pk:hover {
+    box-shadow: 0 0 20px 15px #00acb5;
+    transform: scale(1.1);
+    z-index: 99;
+}
+
+.covid-card.shadow-lightgreen:hover {
+    box-shadow: 0 0 20px 10px lightgreen;
+}
+
+.covid-card.shadow-green:hover {
+    box-shadow: 0 0 20px 10px green;
+}
+
+.covid-card.more:active {
+    transform: scale(1);
+}
+
+
+
+
+
+.covid-pk {
+    width: 45%;
+    background: #00ADB5;
+    position: relative;
+    display: inline-block;
+    border-radius: 16px;
+    padding: 4px 10px;
+    cursor: pointer;
+    height: 83px;
+    margin: 5px;
+}
+
+.covid-pk h1 {
+    float: left;
+}
+
+.covid-pk .mid {
+    position: absolute;
+    font-size: 30px;
+    left: 50%;
+    right: 50%;
+}
+
+.covid-pk:hover .mid {
+    color: lightgreen;
+}
+
+.covid-pk .number {
+    float: right;
+    font-size: 30px;
+}
+
+.covid-pk:hover h1 {
+    color: red;
+}
+
+.covid-pk:hover .number {
+    color: red;
+}
+
+.covid-pk:hover {
+    background-color: #3c4450;
+}
+
+
+
+
+/* footer */
+
+footer {
+    background: #3c4450;
+    width: 100%;
+    height: 40px;
+    border-radius: 16px 16px 0 0;
+    padding: 10px;
+}
+
+progress[value] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 250px;
+    height: 20px;
+  }
+
+progress[value]::-webkit-progress-bar {
+    background-color: #3c4450;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: .3s;
+}
+
+.covid-pk:hover progress[value]::-webkit-progress-bar {
+    background: #00ADB5;
+}
+
+progress[value]::-webkit-progress-value {
+    background: rgb(192, 26, 26);
+    border-radius: 2px; 
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+  }
+
+
+
+/* Utils */
+
+.green {
+    color: lightgreen;
+}
+
+.red {
+    color: red;
+}
+
+.bb {
+    font-weight: bold;
+}
+
+.bfg {
+    font-size: 60px;
+}
+
+/* Animations */
+
+
+/* Loaders */
+.lds-heart {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    transform: rotate(45deg) scale(4);
+    margin-top: 170px;
+    transform-origin: 40px 40px;
+
+  }
+  .lds-heart div {
+    top: 32px;
+    left: 32px;
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background: red;
+    animation: lds-heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  .lds-heart div:after,
+  .lds-heart div:before {
+    content: " ";
+    position: absolute;
+    display: block;
+    width: 32px;
+    height: 32px;
+    background: red;
+  }
+  .lds-heart div:before {
+    left: -24px;
+    border-radius: 50% 0 0 50%;
+  }
+  .lds-heart div:after {
+    top: -24px;
+    border-radius: 50% 50% 0 0;
+  }
+  @keyframes lds-heart {
+    0% {
+      transform: scale(0.95);
+    }
+    5% {
+      transform: scale(1.1);
+    }
+    39% {
+      transform: scale(0.85);
+    }
+    45% {
+      transform: scale(1);
+    }
+    60% {
+      transform: scale(0.95);
+    }
+    100% {
+      transform: scale(0.9);
+    }
+  }
+  

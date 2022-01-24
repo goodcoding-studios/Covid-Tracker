@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="imgs/fav.png" type="image/x-icon">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>Covid Cases | Pakistan</title>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="bfg" data-aos="fade-right"><span class="red">Covid</span> - <span class="green">Pakistan Only</span></h1>
+        <div id="covid-data-pk">
+            <center>
+                <div class="lds-heart"><div></div></div>
+            </center>
+        </div>
+        <br><br><br><br><br><br>
+        <br><br><br><br><br><br>
+        <br><br><br>
+    </div>
+
+    <footer>
+        <p style="float: left" >Made by <a href="https://sirmed.ml" target="_blank">Sirmed</a></p>
+        <p style="float: right;">Data used from other 3rd party services</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+    <script>
+        AOS.init({
+            duration: 900
+        });
+
+        var covid = {
+            newCases: null,
+            newDeaths: null,
+            totalCases: null,
+            totalDeaths: null,
+            totalRecovered: null,
+            activeCases: null,
+            fullyVaccinated: null,
+            partialyVaccinated: null,
+            totalAdministered: null,
+            population: null,
+        }
+
+        fetch('https://covid-19.dataflowkit.com/v1/pakistan')
+        .then(res => {return res.json()})
+        .then(data1 => {
+            console.log(data1)
+            fetch('https://covid-api.mmediagroup.fr/v1/vaccines?status=confirmed&country=Pakistan')
+            .then(res => {return res.json()})
+            .then(data2 => {
+                console.log(data2)
+                covid.newCases = data1['New Cases_text']
+                covid.newDeaths = data1['New Deaths_text']
+                covid.totalCases = data1['Total Cases_text']
+                covid.totalDeaths = data1['Total Deaths_text']
+                covid.totalRecovered = data1['Total Recovered_text']
+                covid.activeCases = data1['Active Cases_text']
+                covid.fullyVaccinated = data2.All.people_vaccinated
+                covid.partialyVaccinated = data2.All.people_partially_vaccinated
+                covid.totalAdministered = data2.All.administered
+                covid.population = data2.All.population
+
+                document.getElementById('covid-data-pk').innerHTML = `
+                <div class="covid-pk" >
+                    <h1>Population</h1>
+                    <span class="number">${commas(covid.population)}</span><br><br>
+                    <progress  style="width: 100%; visibility: hidden;" > </progress>
+                </div>
+
+                <div class="covid-pk" >
+                    <h1>Total Confirmed</h1>
+                    <span class="mid">${covid.newCases}</span>
+                    <span class="number">${covid.totalCases}</span><br><br>
+                    <progress value="${uncomma(covid.totalCases)}" max="${covid.population}" style="width: 100%"> </progress>
+                </div>
+
+                <div class="covid-pk" >
+                    <h1>Total Deaths</h1>
+                    <span class="mid">${covid.newDeaths}</span>
+                    <span class="number">${covid.totalDeaths}</span><br><br>
+                    <progress value="${uncomma(covid.totalDeaths)}" max="${uncomma(covid.totalCases)}" style="width: 100%"> </progress>
+                </div>
+
+                <div class="covid-pk" >
+                    <h1>Active Cases</h1>
+                    <span class="mid">-${covid.totalRecovered}</span>
+                    <span class="number">${covid.activeCases}</span><br><br>
+                    <progress value="${uncomma(covid.activeCases)}" max="${uncomma(covid.totalCases)}" style="width: 100%"> </progress>
+                </div>          
+                
+                <center> <h1 class="bfg">Vaccines</h1> </center>
+
+                <div class="covid-pk" >
+                    <h1>Total Administered</h1>
+                    <span class="number">${commas(covid.totalAdministered)}</span><br><br>
+                    <progress value="${covid.totalAdministered}" max="${covid.population}" style="width: 100%"> </progress>
+                </div>
+
+                <div class="covid-pk" >
+                    <h1>Totaly Vaccinated</h1>
+                    <span class="number">${commas(covid.fullyVaccinated)}</span><br><br>
+                    <progress value="${covid.fullyVaccinated}" max="${covid.totalAdministered}" style="width: 100%"> </progress>
+                </div>
+
+                
+                    <div class="covid-pk" >
+                        <h1>Partially Vaccinated</h1>
+                        <span class="number">${commas(covid.partialyVaccinated)}</span><br><br>
+                        <progress value="${covid.partialyVaccinated}" max="${covid.population}" style="width: 100%"> </progress>
+                    </div>
+
+                
+
+                
+                `
+            })
+        })
+
+        function commas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function uncomma(x) {
+            return parseFloat(x.replace(/,/g, ''))
+        }
+      </script>
+</body>
+</html>
